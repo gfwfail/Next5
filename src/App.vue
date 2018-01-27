@@ -82,9 +82,7 @@
       }, 300)
     },
     mounted () {
-      racesApi.then(xhr => {
-        this.races = xhr.data
-      })
+      this.loadData()
     },
     data () {
       return {
@@ -103,6 +101,11 @@
       }
     },
     methods: {
+      loadData () {
+        racesApi.then(xhr => {
+          this.races = xhr.data
+        })
+      },
       showFlag (code) {
         return flag(code)
       },
@@ -114,7 +117,7 @@
           }
           const index = this.races.indexOf(race)
           this.races.splice(index, 1)
-
+          this.loadData()
         }
         if (s > 120) {
           return moment.unix(race.suspend).fromNow(true)
@@ -197,6 +200,7 @@
         background-repeat: repeat-x, no-repeat;
         padding-bottom: 100px;
     }
+
     .table-responsive {
         display: table;
     }
@@ -263,7 +267,7 @@
         min-height: 50vh;
         padding: 10px 15px;
         margin-right: 20px;
-        margin-bottom:20px;
+        margin-bottom: 20px;
         box-sizing: border-box;
         transition: all .4s ease;
     }
@@ -276,7 +280,7 @@
         &__box {
             background-color: #fff;
             margin: 5px;
-            width:100%;
+            width: 100%;
             padding: 10px;
             overflow: scroll;
         }
