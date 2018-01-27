@@ -105,8 +105,8 @@
         console.log('loading data...')
         racesApi.then(xhr => {
           this.races = xhr.data
-          if(this.currentRace===null){
-            this.currentRace=this.sortedFilteredRaces[0]
+          if (this.currentRace === null) {
+            this.currentRace = this.sortedFilteredRaces[0]
           }
           console.log(xhr)
         })
@@ -246,6 +246,7 @@
     thead > tr > th {
         background-color: #252525 !important;
         color: #fff !important;
+        font-size:.7em;
     }
 
     body {
@@ -297,6 +298,7 @@
         border-radius: 10px;
         background: #D32223;
         width: 100%;
+        font-size: 1em;
     }
 
     .competitors {
