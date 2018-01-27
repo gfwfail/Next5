@@ -76,9 +76,9 @@
   export default {
     name: 'App',
     created () {
-      this.currentTimestamp = Math.round(new Date().getTime() / 1000)
+      this.currentTimestamp = Math.floor(new Date().getTime() / 1000)
       setInterval(() => {
-        this.currentTimestamp = Math.round(new Date().getTime() / 1000)
+        this.currentTimestamp = Math.floor(new Date().getTime() / 1000)
       }, 300)
     },
     mounted () {
@@ -102,8 +102,13 @@
     },
     methods: {
       loadData () {
+        console.log('loading data...')
         racesApi.then(xhr => {
           this.races = xhr.data
+          if(this.currentRace===null){
+            this.currentRace=this.sortedFilteredRaces[0]
+          }
+          console.log(xhr)
         })
       },
       showFlag (code) {
@@ -119,10 +124,13 @@
           this.races.splice(index, 1)
           this.loadData()
         }
-        if (s > 120) {
+        if (s > 600) {
           return moment.unix(race.suspend).fromNow(true)
         }
-        return s + ' seconds'
+        if (s < 120) {
+          return s + ' seconds'
+        }
+        return Math.floor(s / 60) + ' min ' + (s % 60) + ' s'
       },
       isFiltering (type) {
         return this.race_filter.indexOf(type) >= 0
