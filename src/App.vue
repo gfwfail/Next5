@@ -2,7 +2,7 @@
     <div id="app">
 
         <h5 class="logo">Next5</h5>
-        <div class="main d-flex">
+        <div class="main flex-sm-row flex-column d-flex">
             <div class="sidebar">
                 <h5 class="sidebar__title">Next 5 Races</h5>
                 <div class="sidebar__filter justify-content-center d-flex">
@@ -42,17 +42,16 @@
                             <img width="20" height="20" src="./assets/clock.svg"> {{formatRaceTime(currentRace)}}
                         </h5>
                         <div class="content__box">
-                            <table class="table">
+                            <table class="table table-responsive">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" width="170px">Position</th>
+                                    <th scope="col">Position</th>
                                     <th scope="col">Competitor</th>
                                     <th scope="col">Country</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr
-                                        v-for="(competitor) in currentRace.competitors">
+                                <tr v-for="(competitor) in currentRace.competitors">
                                     <th scope="row">{{competitor.position}}</th>
                                     <td>{{competitor.name}}</td>
                                     <td>{{(showFlag(competitor.country))}}</td>
@@ -190,12 +189,16 @@
         margin: 0;
         padding: 0;
         min-height: 100%;
+        width: 100%;
         color: #000005;
         font-family: 'Open Sans', sans-serif;
         background-image: url('./assets/bg.svg'), -webkit-gradient(linear, left top, right bottom, from(#44358c), to(#000));
         background-position: top;
         background-repeat: repeat-x, no-repeat;
         padding-bottom: 100px;
+    }
+    .table-responsive {
+        display: table;
     }
 
     .list-group-item {
@@ -236,7 +239,9 @@
     body {
         background: #000;
     }
-    .card-header{}
+
+    .card-header {
+    }
 
     .sidebar {
         &__title {
@@ -258,6 +263,7 @@
         min-height: 50vh;
         padding: 10px 15px;
         margin-right: 20px;
+        margin-bottom:20px;
         box-sizing: border-box;
         transition: all .4s ease;
     }
@@ -270,7 +276,9 @@
         &__box {
             background-color: #fff;
             margin: 5px;
+            width:100%;
             padding: 10px;
+            overflow: scroll;
         }
         box-sizing: border-box;
         padding: 10px;
@@ -281,26 +289,6 @@
 
     .competitors {
         border-radius: 10px;
-
-        &--thoroughbred {
-            &:after {
-                background: rgba(0, 0, 0, 0.8);
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0;
-                top: 0;
-                content:'';
-                border-radius: 10px 10px 0 0;
-            }
-            position: relative;
-            background-image: url('./assets/thoroughbred.jpg');
-            height: 100px;
-            background-repeat: no-repeat;
-            background-size: cover;
-            border-radius: 10px 10px 0 0;
-        }
-        min-width: 650px;
         border: none;
 
     }
