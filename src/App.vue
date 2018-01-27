@@ -22,8 +22,7 @@
                              :class="{'active':race===currentRace}"
                              v-for="(race,index) in sortedFilteredRaces">
                             <div class="d-flex w-100 justify-content-between small">
-                                <span style="font-weight: 700;">{{race.meeting.name}}</span>
-                                <span>{{race.name}}</span>
+                                <span style="font-weight: 700;">{{race.meeting ? race.meeting.name : ''}}</span>
                                 <span style="font-size:1.1em">{{formatRaceTime(race)}}</span>
                                 <span class="detail">{{race.type}}</span>
                             </div>
@@ -33,7 +32,7 @@
             </div>
             <div class="card competitors" style="width:100%;" v-if="currentRace!=null&&currentRace.competitors">
                 <div class="card-header">
-                    <h5 class="card-title">{{currentRace.meeting.name}} </h5>
+                    <h5 class="card-title">{{currentRace.meeting ? currentRace.meeting.name : ''}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{currentRace.type}}</h6>
                 </div>
                 <div class="card-body">
@@ -246,7 +245,7 @@
     thead > tr > th {
         background-color: #252525 !important;
         color: #fff !important;
-        font-size:.7em;
+        font-size: .7em;
     }
 
     body {
